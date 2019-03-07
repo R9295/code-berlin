@@ -170,10 +170,10 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     ```
     $ pwd
     code-berlin/lite
-    mkdir lite_a
-    cp built/* -r lite_a/
-    cd lite_a
-    nano config.json
+    $ mkdir lite_a
+    $ cp built/* -r lite_a/
+    $ cd lite_a
+    $ nano config.json
     {
      "bootstrapAddresses": [
       "ipfs websocket listener address that you copied"
