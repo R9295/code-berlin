@@ -74,7 +74,7 @@ you cannot grant write access to any peers that weren't assigned at the start. T
 
     Voila! You can now go the the [interface](http://0.0.0.0:3003). Feel free to add some content before moving forward.
 
-4. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_``'s
+5. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s
 The two easiest ways for this are through a signal server or through the websocket listener of ``node_c``.
 Let's go with the websocket option because we have to use this in the ``lite`` version(because of a [bug](https://github.com/ipfs/js-ipfs/issues/1699) in the browser version of IPFS), so it's better to be consistent.
 
@@ -100,7 +100,7 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     Make sure you have the swarm address with ``/ws/`` on it.
 
 
-5. Add the copied addresses to ``node_a`` and ``node_b``'s ``config.json``
+6. Add the copied addresses to ``node_a`` and ``node_b``'s ``config.json``
 
     ```
     $ pwd 
