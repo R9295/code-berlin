@@ -20,7 +20,7 @@ This how-to will explain how to setup a 3 full node system on **one machine**
      $ cp built/* -r node_b
      $ cp built/* -r node_c
     ```
-2. Assign unique repository IDs for all nodes in their config.json
+2. Assign a unique repository ID for all nodes in their config.json
     ```
     $ pwd
     code_berlin/full
@@ -51,8 +51,8 @@ you cannot grant write access to any peers that weren't assigned at the start. T
     ```
 
     Copy the value, and do the same thing for ``node_b``.
-  We don't need to do this for ``node_c`` as it will be initialising the db, and the one
-  initializing automatically has write access.
+  We don't need to do this for ``node_c`` as it will be initialising the db, and the node
+  initializing the db automatically has write access.
 
 
 4. Add the two keys in ``node_c``'s ``config.json``
@@ -80,7 +80,6 @@ you cannot grant write access to any peers that weren't assigned at the start. T
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
-    Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
     Your IPFS id: ....
     Your orbitdb address: /orbitdb/...../wiki
     Your db public key(hex): .....
@@ -88,7 +87,7 @@ you cannot grant write access to any peers that weren't assigned at the start. T
     ```
 
 
-    Voila! You can now go the the [interface](http://0.0.0.0:3003). Feel free to add some content before moving forward.
+    Voila! The node is now online! You can access [interface](http://0.0.0.0:3003). Feel free to add some articles or folders before moving forward.
 
 6. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s
 The two easiest ways for this are through a signal server or through the websocket listener of ``node_c``.
@@ -105,7 +104,6 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
     # this listener is also on localhost, but no ws(websockets)!
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
-    Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
     Your IPFS id: ....
 
     # copy the orbit_db address
@@ -151,7 +149,6 @@ Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
 # copy this address as it's the websocket listener with the local address
 Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
 Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
-Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
 Your IPFS id: ....
 
 # copy the orbit_db address
@@ -174,7 +171,6 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
-    Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
     Your IPFS id: ....
 
     # copy the orbit_db address
