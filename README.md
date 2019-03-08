@@ -1,11 +1,5 @@
 # code-berlin
 
-
-Note: The bugs are only cause of orbit [not being compatible](https://github.com/orbitdb/orbit-db/issues/543) (yet) with ipfs's latest stable version which fixes all of them.
-
-Note: some of the output of the bash commands has been replaced with dots as it will vary instance to instance
-and could be too big to be legible on the README.
-
 ## How to: Full node(one machine)
 
 This how-to will explain how to setup a 3 full node system on **one machine**
@@ -208,3 +202,9 @@ This how-to will explain how to setup a lite node and connect it to a full node 
 
 ## How to: Lite node(each node is on a different machine)
 Change the localhost listener of ``node_c`` to the one with the local address and edit ``lite_a``'s config.json
+
+
+Note: The bugs are only cause of orbit [not being compatible](https://github.com/orbitdb/orbit-db/issues/543) (yet) with ipfs's latest stable version which fixes all of them.
+
+Note: some of the output of the bash commands has been replaced with dots as it will vary instance to instance
+and could be too big to be legible on the README.
