@@ -20,7 +20,7 @@ This how-to will explain how to setup a 3 full node system on **one machine**
      $ cp built/* -r node_b
      $ cp built/* -r node_c
     ```
-2. Assign repository IDs for all nodes in their config.json
+2. Assign unique repository IDs for all nodes in their config.json
     ```
     $ pwd
     code_berlin/full
@@ -30,7 +30,7 @@ This how-to will explain how to setup a 3 full node system on **one machine**
       "bootstrap_peers": [],
       "server_port": 3003,
       "db_address": "wiki",
-      "allowed_to_write": ["node_a_key", "node_b_key"],
+      "allowed_to_write": [],
       "ipfs_port": 1544,
       "repo_id": "ENTER YOUR ID HERE. Could be as simple as node_a"
     }
