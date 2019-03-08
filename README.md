@@ -1,7 +1,7 @@
 # code-berlin
 
 
-Note: The bugs are only cause of orbit [not being compatible](https://github.com/orbitdb/orbit-db/issues/543) (yet) with ipfs's latest stable version which fixes all of them.  
+Note: The bugs are only cause of orbit [not being compatible](https://github.com/orbitdb/orbit-db/issues/543) (yet) with ipfs's latest stable version which fixes all of them.
 
 Note: some of the output of the bash commands has been replaced with dots as it will vary instance to instance
 and could be too big to be legible on the README.
@@ -12,7 +12,6 @@ This how-to will explain how to setup a 3 full node system on **one machine**
 
 
 1. Clone the respository and setup directories
-
      ```
      $ git clone https://github.com/R9295/code-berlin.git
      $ cd code-berlin/full
@@ -21,10 +20,26 @@ This how-to will explain how to setup a 3 full node system on **one machine**
      $ cp built/* -r node_b
      $ cp built/* -r node_c
     ```
-
-2. Initialise the database. <br>
+2. Assign repository IDs for all nodes in their config.json
+    ```
+    $ pwd
+    code_berlin/full
+    $ cd node_a
+    nano config.json
+    {
+      "bootstrap_peers": [],
+      "server_port": 3003,
+      "db_address": "wiki",
+      "allowed_to_write": ["node_a_key", "node_b_key"],
+      "ipfs_port": 1544,
+      "repo_id": "ENTER YOUR ID HERE. Could be as simple as node_a"
+    }
+    # assign repo_ids to node_b and node_c also
+    ```
+    
+3. Initialise the database. <br>
   OrbitDB doesn't support assigning permissions dynamically(for now, it's in [development](https://github.com/orbitdb/orbit-db/issues/292)), so once the database is initialized,
-you cannot grant write access to any peers that weren't assigned at the start. The identifier that allows peers to write is the **hex value** of the **public key** of the orbitdb instance. So we'll have to generate our keys first, and then initialise a database. 
+you cannot grant write access to any peers that weren't assigned at the start. The identifier that allows peers to write is the **hex value** of the **public key** of the orbitdb instance. So we'll have to generate our keys first, and then initialise a database.
 
       ```
       $ pwd
@@ -35,27 +50,28 @@ you cannot grant write access to any peers that weren't assigned at the start. T
      Your key is   045200d216ff70bc8417b6a24432f5f10aaced265..........................
     ```
 
-    Copy the value, and do the same thing for ``node_b``. 
-  We don't need to do this for ``node_c`` as it will be initialising the db, and the one 
+    Copy the value, and do the same thing for ``node_b``.
+  We don't need to do this for ``node_c`` as it will be initialising the db, and the one
   initializing automatically has write access.
 
 
-3. Add the two keys in ``node_c``'s ``config.json``
+4. Add the two keys in ``node_c``'s ``config.json``
 
     ```
     $ pwd
     code-berlin/full/node_c
     $ nano config.json
     {
-      "bootstrapAddresses": [],
-      "serverPort": 3003,
-      "databaseAddress": "wiki",
-      "allowedToWrite": ["node_a_key", "node_b_key"],
-      "ipfsPort": 1544
+      "bootstrap_peers": [],
+      "server_port": 3003,
+      "db_address": "wiki",
+      "allowed_to_write": ["node_a_key", "node_b_key"],
+      "ipfs_port": 1544,
+      "repo_id": "node_c"
     }
     ```
 
-4. Start ``node_c``
+5. Start ``node_c``
 
     ```
     $ pwd
@@ -74,7 +90,7 @@ you cannot grant write access to any peers that weren't assigned at the start. T
 
     Voila! You can now go the the [interface](http://0.0.0.0:3003). Feel free to add some content before moving forward.
 
-5. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s
+6. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s
 The two easiest ways for this are through a signal server or through the websocket listener of ``node_c``.
 Let's go with the websocket option because we have to use this in the ``lite`` version(because of a [bug](https://github.com/ipfs/js-ipfs/issues/1699) in the browser version of IPFS), so it's better to be consistent.
 
@@ -83,7 +99,7 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     $ pwd
     code-berlin/full/node-c
     $ ./code-berlin-<yourOS> start
-    
+
     # copy this address as it's the listener on localhost with websockets
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
@@ -91,8 +107,8 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
     Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
     Your IPFS id: ....
-    
-    # copy the orbit_db address 
+
+    # copy the orbit_db address
     Your orbitdb address: /orbitdb/...../wiki
     Your db public key(hex): .....
     The app is running on http://0.0.0.0:3003
@@ -100,24 +116,25 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     Make sure you have the swarm address with ``/ws/`` on it.
 
 
-6. Add the copied addresses to ``node_a`` and ``node_b``'s ``config.json``
+7. Add the copied addresses to ``node_a`` and ``node_b``'s ``config.json``
 
     ```
-    $ pwd 
+    $ pwd
     code-berlin/full/node-a
     $ nano config.json
     {
-    "bootstrapAddresses": [
+    "bootstrap_peers": [
       "ipfs websocket listener address that you copied"
     ],
-      "serverPort": 3003,
-      "databaseAddress": "orbitdb address that you copied",
-      "allowedToWrite": [],
-      "ipfsPort": 1544
+      "server_port": 3003,
+      "db_address": "orbitdb address that you copied",
+      "allowed_to_write": [],
+      "ipfs_port": 1544,
+      "repo_id": "node_a"
     }
     # repeat for node_b
     ```
-**That should be it!** Start ``node_c`` if it's off, and then start ``node_a`` and ``node_b``. If you've added content before 
+**That should be it!** Start ``node_c`` if it's off, and then start ``node_a`` and ``node_b``. If you've added content before
 ``node_a`` and ``node_b`` booted, you should see this message in your terminal: ``Synced with new data!``.
 Congratulations! You have successfully set-up the nodes. Try adding content on different nodes and watch them sync P2P!
 
@@ -131,13 +148,13 @@ $ ./code-berlin-<yourOS> start
 
 
 Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
-# copy this address as it's the websocket listener with the local address 
+# copy this address as it's the websocket listener with the local address
 Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
 Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
 Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
 Your IPFS id: ....
 
-# copy the orbit_db address 
+# copy the orbit_db address
 Your orbitdb address: /orbitdb/...../wiki
 Your db public key(hex): .....
 The app is running on http://0.0.0.0:3003
@@ -147,11 +164,11 @@ The app is running on http://0.0.0.0:3003
 ## How to: Lite node(one machine)
 This how-to will explain how to setup a lite node and connect it to a full node that's running on **the same machine**
 
-1. Setup atleast one full node, and start it; let's keep ``node_c`` from the how-to above.  
+1. Setup atleast one full node, and start it; let's keep ``node_c`` from the how-to above.
     ```
     $ pwd
     code-berlin/full/node_c
-    
+
     $ ./code-berlin-<yourOS> start
     # copy this address as it's the listener on localhost with websockets
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
@@ -160,7 +177,7 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     Swarm listening on /dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/<hash>
     Your IPFS id: ....
 
-    # copy the orbit_db address 
+    # copy the orbit_db address
     Your orbitdb address: /orbitdb/...../wiki
     Your db public key(hex): .....
     The app is running on http://0.0.0.0:3003
@@ -175,18 +192,18 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     $ cd lite_a
     $ nano config.json
     {
-     "bootstrapAddresses": [
+     "bootstrap_peers": [
       "ipfs websocket listener address that you copied"
     ],
-      "serverPort": 3001,
-      "databaseAddress": "orbitdb address that you copied",
+      "server_port": 3001,
+      "db_address": "orbitdb address that you copied",
     }
     ```
 3. Run the lite node
     ```
     $ pwd
     code-berlin/lite/lite_a
-    $ ./code-berlin-lite 
+    $ ./code-berlin-lite
     listening on 0.0.0.0:3001
     ```
     This should automatically open your browser and direct you to the interface. Wait for a bit, and you should get a message
@@ -194,4 +211,4 @@ This how-to will explain how to setup a lite node and connect it to a full node 
 
 
 ## How to: Lite node(each node is on a different machine)
-Change the localhost listener of ``node_c`` to the one with the local address and edit ``lite_a``'s config.json  
+Change the localhost listener of ``node_c`` to the one with the local address and edit ``lite_a``'s config.json
