@@ -83,7 +83,7 @@ you cannot grant write access to any peers that weren't assigned at the start. T
 
     Voila! The node is now online! You can access [interface](http://0.0.0.0:3003). Feel free to add some articles or folders before moving forward.
 
-6. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s
+6. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s.
 The two easiest ways for this are through a signal server or through the websocket listener of ``node_c``.
 Let's go with the websocket option because we have to use this in the ``lite`` version(because of a [bug](https://github.com/ipfs/js-ipfs/issues/1699) in the browser version of IPFS), so it's better to be consistent.
 
@@ -201,7 +201,7 @@ This how-to will explain how to setup a lite node and connect it to a full node 
 
 
 ## How to: Lite node(each node is on a different machine)
-Change the localhost listener of ``node_c`` to the one with the local address and edit ``lite_a``'s config.json
+Change the ``bootstrap_peers`` address in ``lite_a``'s ``config.json`` to the local listener(not localhost!) of ``node_c``
 
 
 Note: The bugs are only cause of orbit [not being compatible](https://github.com/orbitdb/orbit-db/issues/543) (yet) with ipfs's latest stable version which fixes all of them.
