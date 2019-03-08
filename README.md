@@ -25,7 +25,7 @@ This how-to will explain how to setup a 3 full node system on **one machine**
     $ pwd
     code_berlin/full
     $ cd node_a
-    nano config.json
+    $ nano config.json
     {
       "bootstrap_peers": [],
       "server_port": 3003,
