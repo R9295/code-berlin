@@ -16,8 +16,7 @@ $ npx pkg package.json
 # The built folder already exists with an empty config.
 $ mv code-berlin-<yourOS> built/
 ``` 
-If you're running the node on Linux or Windows, you will also need to include some modules as ``pkg`` doesn't support
-bundling ``.node`` files in the executable. For this, do:
+``pkg`` doesn't support bundling ``.node`` files in the executable; you should see a couple of warning messages. To fix this, you have to have a ``node_modules`` forlder in the same folder as the executable with the packages that ``pkg`` couldn't make the bytecode for. There are only three packages that have to be copied.
 ```
 $ pwd
 code-berlin/full
