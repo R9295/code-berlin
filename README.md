@@ -9,7 +9,7 @@ $ cd code-berlin/full
 # Install dependencies
 $ npm install
 # Use npx to avoid installing pkg globally as you only have to run it once.
-# This will generate a package for Linux, Mac and Windows
+# This will generate a package for Linux, Mac and Windows.
 $ npx pkg package.json
 # The built folder already exists with an empty config.
 $ mv code-berlin-<yourOS> built/
@@ -56,7 +56,7 @@ This how-to will explain how to setup a 3 full node system on **one machine**.
       "ipfs_port": 1544,
       "repo_id": "ENTER YOUR ID HERE. Could be as simple as node_a"
     }
-    # assign repo_ids to node_b and node_c also
+    # assign repo_ids to node_b and node_c also.
     ```
     
 3. Initialise the database. <br>
@@ -121,14 +121,14 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     code-berlin/full/node-c
     $ ./code-berlin-<yourOS> start
 
-    # copy this address as it's the listener on localhost with websockets
+    # copy this address as it's the listener on localhost with websockets.
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
     # this listener is also on localhost, but no ws(websockets)!
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
     Your IPFS id: ....
 
-    # copy the orbit_db address
+    # copy the orbit_db address.
     Your orbitdb address: /orbitdb/...../wiki
     Your db public key(hex): .....
     The app is running on http://0.0.0.0:3003
@@ -160,20 +160,20 @@ Congratulations! You have successfully set-up the nodes. Try adding content on d
 
 
 ## How to: Full node(each node has an individual machine)
-Very similar process when each folder is swapped for a different machine, only one small change to implement:
+The process is very similar when each folder is swapped for a different machine, there's only one small change to implement:
 When you have to copy the swarm and db addresses on step 5, instead of copying the localhost listener of ``node_c``, copy the websocket listener with the **local address**.
 ```
-# start the instance if it's not running
+# start the instance if it's not running.
 $ ./code-berlin-<yourOS> start
 
 
 Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
-# copy this address as it's the websocket listener with the local address
+# copy this address as it's the websocket listener with the local address.
 Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
 Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
 Your IPFS id: ....
 
-# copy the orbit_db address
+# copy the orbit_db address.
 Your orbitdb address: /orbitdb/...../wiki
 Your db public key(hex): .....
 The app is running on http://0.0.0.0:3003
@@ -188,14 +188,14 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     $ pwd
     code-berlin/full/node_c
 
-    $ ./code-berlin-<yourOS> start
+    $ ./code-berlin-<yourOS> start.
     # copy this address as it's the listener on localhost with websockets
     Swarm listening on /ip4/127.0.0.1/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/192.168.1.104/tcp/1545/ws/ipfs/<hash>
     Swarm listening on /ip4/127.0.0.1/tcp/1544/ipfs/<hash>
     Your IPFS id: ....
 
-    # copy the orbit_db address
+    # copy the orbit_db address.
     Your orbitdb address: /orbitdb/...../wiki
     Your db public key(hex): .....
     The app is running on http://0.0.0.0:3003
