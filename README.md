@@ -3,7 +3,7 @@
 Tested on Node.js ``v10.13.0``, should be fine with Node.js ``>=v10``
 
 ## Build
-We first need to build our full node as GitHub places a 100MB limit on a file. The "lite" version is ~60MB so I've included 
+We first need to build our full node as GitHub places a 100MB limit on a file. The "lite" version, however, is ~60MB so I've included 
 the executable.
 ```
 $ git clone https://github.com/R9295/code-berlin.git
