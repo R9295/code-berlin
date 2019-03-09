@@ -1,5 +1,7 @@
 # code-berlin
 
+Tested on Node.js ``v10.13.0``, should be fine with Node.js ``>=v10``
+
 ## Build
 We first need to build our full node as GitHub places a 100MB limit on a file. The "lite" version is ~60MB so I've included 
 the executable.
@@ -113,7 +115,7 @@ you cannot grant write access to any peers that weren't assigned at the start. T
 
 6. Connect ``node_a`` and ``node_b``'s ipfs and orbitdb instance to ``node_c``'s.
 The two easiest ways for this are through a signal server or through the websocket listener of ``node_c``.
-Let's go with the websocket option because we have to use this in the ``lite`` version(because of a [bug](https://github.com/ipfs/js-ipfs/issues/1699) in the browser version of IPFS), so it's better to be consistent.
+Let's go with the websocket option because we have to use this in the ``lite`` version(because of a [bug](https://github.com/ipfs/js-ipfs/issues/1699) in the browser version of IPFS), so it's better to be consistent. You can also connect ``node_a`` to ``node_b`` and vice versa but because of the Node.js version of IPFS having working DHT, it's not necessary.
 
     ```
     # start the instance if it's not running
