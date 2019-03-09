@@ -29,7 +29,8 @@ $ mv _node_modules built/node_modules
 ```
 That's it!
 
-
+# How to
+#### When serving multiple nodes on the same machine, make sure to have a unique IPFS and webserver port for each node.
 ## How to: Full node(one machine)
 
 This how-to will explain how to setup a 3 full node system on **one machine**. 
@@ -52,10 +53,10 @@ This how-to will explain how to setup a 3 full node system on **one machine**.
     $ nano config.json
     {
       "bootstrap_peers": [],
-      "server_port": 3003,
+      "server_port": 3002,
       "db_address": "wiki",
       "allowed_to_write": [],
-      "ipfs_port": 1544,
+      "ipfs_port": 1600,
       "repo_id": "ENTER YOUR ID HERE. Could be as simple as node_a"
     }
     # assign repo_ids to node_b and node_c also.
@@ -148,10 +149,10 @@ Let's go with the websocket option because we have to use this in the ``lite`` v
     "bootstrap_peers": [
       "ipfs websocket listener address that you copied"
     ],
-      "server_port": 3003,
+      "server_port": 3002,
       "db_address": "orbitdb address that you copied",
       "allowed_to_write": [],
-      "ipfs_port": 1544,
+      "ipfs_port": 1600,
       "repo_id": "node_a"
     }
     # repeat for node_b
@@ -182,7 +183,7 @@ The app is running on http://0.0.0.0:3003
 ```
 
 
-## How to: Lite node(one machine)
+## How to: Lite node(full node is on the same machine)
 This how-to will explain how to setup a lite node and connect it to a full node that's running on **the same machine**
 
 1. Setup atleast one full node, and start it; let's keep ``node_c`` from the how-to above.
@@ -215,7 +216,7 @@ This how-to will explain how to setup a lite node and connect it to a full node 
      "bootstrap_peers": [
       "ipfs websocket listener address that you copied"
     ],
-      "server_port": 3001,
+      "server_port": 3000,
       "db_address": "orbitdb address that you copied",
     }
     ```
@@ -230,7 +231,7 @@ This how-to will explain how to setup a lite node and connect it to a full node 
     asking you to refresh the page cause your database has been synced! Enjoy IPFS and OrbitDB in the browser!
 
 
-## How to: Lite node(each node is on a different machine)
+## How to: Lite node(full node is on a different machine)
 Change the ``bootstrap_peers`` address in ``lite_a``'s ``config.json`` to the local listener(not localhost!) of ``node_c``
 
 
