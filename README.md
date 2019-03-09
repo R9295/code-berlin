@@ -1,14 +1,42 @@
 # code-berlin
 
+## Build
+We first need to build our full node as GitHub places a 100MB limit on a file. The "lite" version is ~60MB so I've included 
+the executable.
+```
+$ git clone https://github.com/R9295/code-berlin.git
+$ cd code-berlin/full
+# Install dependencies
+$ npm install
+# Use npx to avoid installing pkg globally as you only have to run it once.
+# This will generate packages for Linux, Mac and Windows
+$ npx pkg package.json
+# The built folder already exists with an empty config.
+$ mv code-berlin-<yourOS> built/
+``` 
+If you're running the node on Linux or Windows, you will also need to include some modules as ``pkg`` doesn't support
+bundling ``.node`` files in the executable. For this, do:
+```
+$ pwd
+code-berlin/full
+mkdir _node_modules
+$ cp -r node_modules/asmcrypto.js _node_modules/
+$ cp -r node_modules/leveldown _node_modules/
+$ cp -r node_modules/borc _node_modules/
+$ mv _node_modules built/node_modules
+```
+That's it!
+
+
 ## How to: Full node(one machine)
 
-This how-to will explain how to setup a 3 full node system on **one machine**
+This how-to will explain how to setup a 3 full node system on **one machine**. 
 
 
-1. Clone the respository and setup directories
+1. Setup directories
      ```
-     $ git clone https://github.com/R9295/code-berlin.git
-     $ cd code-berlin/full
+     $ pwd
+     code-berlin/full
      $ mkdir node_a node_b node_c
      $ cp built/* -r node_a
      $ cp built/* -r node_b
