@@ -1,0 +1,8 @@
+{
+  "bootstrap_peers": [],
+  "server_port": 3003,
+  "db_address": "wiki",
+  "allowed_to_write": [],
+  "ipfs_port": 1544,
+  "repo_id": "default"
+}

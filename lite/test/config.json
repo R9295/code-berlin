@@ -1,0 +1,7 @@
+{
+  "bootstrapAddresses": [
+    "/ip4/127.0.0.1/tcp/1601/ws/ipfs/QmcZhPVyPCDxYYTh59AMQUJg38Zb8ShHeGbP1WpnFtYFdp"
+  ],
+  "serverPort": 3000,
+  "databaseAddress": "/orbitdb/QmTU9xdWqfn2WffCMzyDcB9Fsq4KwiJF8QozPsZExzdHwR/wiki"
+}
