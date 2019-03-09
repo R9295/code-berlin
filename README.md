@@ -9,7 +9,7 @@ $ cd code-berlin/full
 # Install dependencies
 $ npm install
 # Use npx to avoid installing pkg globally as you only have to run it once.
-# This will generate packages for Linux, Mac and Windows
+# This will generate a package for Linux, Mac and Windows
 $ npx pkg package.json
 # The built folder already exists with an empty config.
 $ mv code-berlin-<yourOS> built/
